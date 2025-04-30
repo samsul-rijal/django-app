@@ -35,8 +35,15 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_KEY }}
           script: |
+            # Step 1: Pull the latest Docker image
             docker pull ${{ secrets.DOCKER_USERNAME }}/myproject:latest
-            docker stop myproject || true
-            docker rm myproject || true
+
+            # Step 2: Stop and remove any previous container
+            docker-compose -f /path/to/your/docker-compose.yml down || true
+
+            # Step 3: Clean up any unused Docker resources
             docker system prune -af || true
-            docker run -d --name myproject -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/myproject:latest
+
+            # Step 4: Restart the services using Docker Compose
+            docker-compose -f /path/to/your/docker-compose.yml up -d
+

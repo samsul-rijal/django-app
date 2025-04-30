@@ -97,7 +97,7 @@ DATABASES = {
         'NAME': 'db_blog',
         'USER': 'postgres',
         'PASSWORD': 'admin',
-        'HOST': '172.18.0.2',  # BUKAN 'localhost', tapi 'db' sesuai nama service docker-compose
+        'HOST': 'db',  # BUKAN 'localhost', tapi 'db' sesuai nama service docker-compose
         'PORT': '5432',
     }
 }
