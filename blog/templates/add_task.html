@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Add Task</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-2">
+                <label for="nama_task">Nama Task</label>
+                <input type="text" name="nama_task" id="nama_task" class="form-control" required>
+            </div>
+
+            <div class="mb-2">
+                <label for="start_date">Start Date</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" required>
+            </div>
+
+            <div class="mb-2">
+                <label for="end_date">End Date</label>
+                <input type="date" name="end_date" id="end_date" class="form-control" required>
+            </div>
+
+            <div class="mb-2">
+                <label for="user">Assigned User</label>
+                <select name="user_id" id="user_id" class="form-control" required>
+                    <option value="">Select User</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <a href="/add-task" class="btn btn-primary mb-5">Tambah Task</a>
+    <div class="row">
+        {% for user in users %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>{{ user.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <h5>Task:</h5>
+                    {% for task in tasks %}
+                        {% if task.user == user %}
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <h6>{{ task.nama_task }}</h6>
+                                    <p>Start: {{ task.start_date }} - End: {{ task.end_date }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+      margin: 0;
+      background-color: #f3f4f6;
+    }
+
+    .sidebar {
+      width: 280px;
+      background-color: #1f2937;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px 15px;
+      border-radius: 4px;
+    }
+
+    .sidebar a.active,
+    .sidebar a:hover {
+      background-color: #374151;
+    }
+
+    .accordion-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 10px 15px;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      padding-left: 10px;
+    }
+
+    .accordion-content.show {
+      max-height: 500px;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      height: 60px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .content {
+      padding: 20px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .accordion-title .icon {
+      font-size: 14px;
+    }
+    
+  </style>
+</head>
+<body>
+
+  {% include 'sidebar.html' %}
+
+  <div class="main-content">
+
+    {% include 'navbar.html' %}
+
+
+    {% block content %}{% endblock %}
+    
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+
+      // Highlight menu aktif
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        let linkPath = link.getAttribute('href').replace(/\/$/, '') || '/';
+        // if (linkPath === currentPath) {
+        //   link.classList.add('active');
+
+        //   const accordionContent = link.closest('.accordion-content');
+        //   if (accordionContent) {
+        //     accordionContent.classList.add('show');
+        //     const icon = accordionContent.previousElementSibling.querySelector('.icon');
+        //     if (icon) icon.innerHTML = '<i class="fa-solid fa-angle-down"></i>';
+        //   }
+        // }
+      });
+
+      // Toggle accordion
+      document.querySelectorAll('.accordion-title').forEach(title => {
+        title.addEventListener('click', () => {
+          const content = title.nextElementSibling;
+          const icon = title.querySelector('.icon');
+
+          content.classList.toggle('show');
+          icon.innerHTML = content.classList.contains('show')
+            ? '<i class="fa-solid fa-angle-down"></i>'
+            : '<i class="fa-solid fa-angle-right"></i>';
+        });
+      });
+    });
+  </script>
+
+  <!-- <script>
+    // Burger menu toggle
+    const burgerMenu = document.getElementById("burger-menu");
+    const sidebar = document.getElementById("sidebar");
+  
+    burgerMenu.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+  
+    // Accordion toggle
+    const accordionTitles = document.querySelectorAll(".accordion-title");
+  
+    accordionTitles.forEach((title) => {
+      title.addEventListener("click", () => {
+        const content = title.nextElementSibling;
+        const icon = title.querySelector(".icon i");
+  
+        content.classList.toggle("show");
+        icon.classList.toggle("fa-angle-right");
+        icon.classList.toggle("fa-angle-down");
+      });
+    });
+  </script>
+   -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>
