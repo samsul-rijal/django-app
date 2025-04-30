@@ -1,4 +1,4 @@
-name: CI/CD for Django + Docker 
+name: CI/CD for Django + Docker
 
 on:
   push:
