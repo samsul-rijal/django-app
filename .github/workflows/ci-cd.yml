@@ -35,6 +35,8 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_KEY }}
           script: |
+            cd /home/ec2-user/django-app
+            git pull origin master
             docker pull ${{ secrets.DOCKER_USERNAME }}/myproject:latest
             docker stop myproject || true
             docker rm myproject || true
